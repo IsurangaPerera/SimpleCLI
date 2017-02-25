@@ -24,5 +24,22 @@ func main() {
 
     // Verify that a subcommand has been provided
     // os.Arg[0] is the main command
+    if(len(os.Args)< 2) {
+         fmt.Println("list or count subcommand is required")
+         os.Exit(1)
+    }
+
+    //Switch on the subcommand
+    switch os.Args[1] {
+    case "list":
+        listCommand.Parse(os.Args[2:])
+    case "count":
+        countCommand.Parse(os.Args[2:])
+    default:
+        flag.printDefaults()
+        os.Exit(1)
+    }
+
+
 
 }
