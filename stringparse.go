@@ -40,6 +40,27 @@ func main() {
         os.Exit(1)
     }
 
+    //Check which subcommand was Parsed using FlagSet
+    if listCommand.Parsed() {
+        if *listTextPtr == "" {
+            listCommand.PrintDefaults()
+            os.Exit(1)
+        }
+
+        //Choice Flag
+        metricChoices := map[string]bool{"chars" : true, "words" : true, "lines" : true}
+        if _, validChoice := metricChoices[*listMetricPtr]; !validChoice {
+            listCommand.PrintDefaults()
+            os.Exit(1)
+        }
+        // Print
+        fmt.Printf("textPtr: %s, metricPtr: %s, uniquePtr: %t\n",
+            *listTextPtr,
+            *listMetricPtr,
+            *listUniquePtr,
+        )
+    }
+
 
 
 }
